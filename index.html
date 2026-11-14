@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>담백스튜디오</title>
+<meta name="description" content="담백스튜디오는 꼭 필요한 기능만 담은 휴대폰 앱을 만드는 1인 스튜디오입니다.">
+<meta name="theme-color" content="#08090A">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#08090A;--bg2:#101113;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+  --fg:#F4F5F6;--sub:#9A9FA8;--accent:#5FD3B5;--on-accent:#06261E;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --wrap:1080px;--pad:32px;--gap:128px;
+}
+[data-theme="light"]{
+  --bg:#FBFBFC;--bg2:#F3F4F6;--line:#E4E5E9;--line2:#D3D5DA;
+  --fg:#0E0F11;--sub:#5A5F68;--accent:#0B7F63;--on-accent:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--fg);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+::selection{background:var(--accent);color:var(--on-accent)}
+a{color:inherit}
+button{font:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 12px;border-radius:6px;z-index:20}
+.skip:focus{left:8px}
+
+/* 머리 */
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em;text-decoration:none}
+.mark i{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--fg);position:relative}
+.mark i::after{content:"";position:absolute;left:3px;right:3px;bottom:3px;height:1.5px;background:var(--accent)}
+.menu{display:flex;gap:4px;list-style:none}
+.menu a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;color:var(--sub);text-decoration:none;border-radius:8px;transition:color 160ms ease}
+@media (hover:hover) and (pointer:fine){.menu a:hover{color:var(--fg)}}
+
+/* 첫 화면 */
+.hero{min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;padding:96px 0 64px;border-bottom:1px solid var(--line)}
+.hero>.wrap{width:100%}
+.hero h1{font-size:clamp(44px,8.2vw,80px);line-height:1.08;font-weight:620;letter-spacing:-.035em;max-width:11em}
+.hero h1 span{color:var(--sub)}
+.hero p{margin-top:28px;font-size:clamp(17px,2vw,20px);color:var(--sub);max-width:30em;line-height:1.65}
+.acts{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-size:15px;font-weight:550;text-decoration:none;transition:transform 160ms var(--ease),background-color 160ms ease,border-color 160ms ease}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:var(--fg);color:var(--bg)}
+.btn.sec{border:1px solid var(--line2);color:var(--fg)}
+@media (hover:hover) and (pointer:fine){.btn.sec:hover{border-color:var(--sub)}.btn.pri:hover{background:color-mix(in srgb,var(--fg) 88%,var(--bg))}}
+.facts{margin-top:72px;display:flex;flex-wrap:wrap;gap:12px 40px;font-size:14px;color:var(--sub)}
+.facts b{color:var(--fg);font-weight:550;margin-right:8px}
+
+/* 칸 공통 */
+section.s{padding:var(--gap) 0;border-bottom:1px solid var(--line)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px 64px;align-items:start}
+h2{font-size:clamp(30px,4.2vw,44px);line-height:1.15;font-weight:600;letter-spacing:-.025em}
+.lead{color:var(--sub);max-width:34em}
+.lead+.lead{margin-top:16px}
+
+/* 일하는 방식: 선으로 나눈 목록 */
+.rows{margin-top:72px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px 64px;padding:28px 0;border-bottom:1px solid var(--line)}
+.row h3{font-size:20px;font-weight:600;letter-spacing:-.015em;line-height:1.4}
+.row p{color:var(--sub)}
+
+/* 앱 칸 */
+.soon{margin-top:72px;border:1px solid var(--line);border-radius:14px;background:var(--bg2);padding:40px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+.soon h3{font-size:20px;font-weight:600;letter-spacing:-.015em}
+.soon p{color:var(--sub);margin-top:4px}
+
+/* 문의 */
+.mailbox{margin-top:72px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mail{font-size:clamp(22px,3.4vw,34px);font-weight:600;letter-spacing:-.02em;text-decoration:none;font-variant-numeric:tabular-nums}
+.copied{font-size:14px;color:var(--accent);min-height:1em}
+.note{margin-top:20px;font-size:14px;color:var(--sub);max-width:40em}
+
+/* 개인정보 */
+.priv h3{font-size:18px;font-weight:600;margin:40px 0 8px;letter-spacing:-.01em}
+.priv p,.priv li{color:var(--sub);max-width:40em}
+.priv ul{padding-left:1.2em}
+.priv li+li{margin-top:6px}
+.priv .meta{margin-top:24px;font-size:14px}
+mark.tbd{background:transparent;color:var(--accent);font-weight:550}
+.draft{display:inline-block;margin-top:16px;font-size:14px;color:var(--sub);border:1px solid var(--line2);border-radius:999px;padding:2px 12px}
+
+footer{padding:48px 0 64px;font-size:14px;color:var(--sub)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer a{text-decoration:none}
+@media (hover:hover) and (pointer:fine){footer a:hover{color:var(--fg)}}
+
+/* 첫 화면 등장 한 번 */
+.enter>*{animation:rise 600ms var(--ease) both}
+.enter>*:nth-child(2){animation-delay:60ms}.enter>*:nth-child(3){animation-delay:120ms}.enter>*:nth-child(4){animation-delay:170ms}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.enter>*{animation:fade 300ms ease both}@keyframes fade{from{opacity:0}}html{scroll-behavior:auto}}
+
+@media (max-width:760px){
+  :root{--pad:20px;--gap:80px}
+  .menu a{padding:0 8px;font-size:13px}
+  .menu li.hide-m{display:none}
+  .head,.row{grid-template-columns:1fr}
+  .row{gap:6px}
+  .rows,.soon,.mailbox{margin-top:48px}
+  .soon{padding:28px;grid-template-columns:1fr;gap:16px}
+  .hero{padding:72px 0 48px}
+  .facts{margin-top:56px;flex-direction:column;gap:8px}
+  .acts .btn{flex:1 1 100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="#top" aria-label="담백스튜디오 처음으로"><i aria-hidden="true"></i>담백스튜디오</a>
+    <nav aria-label="주 메뉴"><ul class="menu">
+      <li><a href="#about">회사 소개</a></li>
+      <li><a href="#apps">앱</a></li>
+      <li><a href="#contact">문의</a></li>
+      <li class="hide-m"><a href="privacy.html">개인정보 처리방침</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap enter">
+      <h1>꼭 필요한 것만<br><span>담백하게 만듭니다.</span></h1>
+      <p>담백스튜디오는 휴대폰 앱을 만드는 1인 스튜디오입니다. 기능을 덜어 내고, 쓰는 사람이 바로 알아보는 화면을 만듭니다.</p>
+      <div class="acts">
+        <a class="btn pri" href="mailto:dambaekstudio@gmail.com">이메일로 문의하기</a>
+        <a class="btn sec" href="#about">회사 소개 보기</a>
+      </div>
+      <div class="facts" aria-label="회사 정보">
+        <span><b>운영</b>1인 스튜디오</span>
+        <span><b>만드는 것</b>휴대폰 앱</span>
+        <span><b>연락</b>dambaekstudio@gmail.com</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="about-h">회사 소개</h2>
+        <div>
+          <p class="lead">담백스튜디오는 혼자 운영하는 작은 회사입니다. 많이 넣기보다 꼭 필요한 기능만 남겨, 처음 쓰는 사람도 설명 없이 쓸 수 있는 앱을 만듭니다.</p>
+          <p class="lead">소개할 수 있는 결과가 생기면 이 자리에 하나씩 적겠습니다.</p>
+        </div>
+      </div>
+      <div class="rows">
+        <div class="row"><h3>덜어 냅니다</h3><p>기능을 더하기 전에 뺄 수 있는지 먼저 봅니다. 화면 하나에는 할 일 하나만 둡니다.</p></div>
+        <div class="row"><h3>쓰는 사람 눈으로 봅니다</h3><p>내놓기 전에 처음 쓰는 사람처럼 직접 써 보고, 막히는 곳을 고친 뒤에 내놓습니다.</p></div>
+        <div class="row"><h3>필요한 정보만 받습니다</h3><p>앱이 일하는 데 꼭 필요하지 않은 개인정보는 받지 않습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="apps" aria-labelledby="apps-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="apps-h">앱</h2>
+        <p class="lead">지금 앱을 준비하고 있습니다. 출시하면 이곳에서 앱 이름과 화면, 내려받는 곳을 알려 드립니다.</p>
+      </div>
+      <div class="soon" role="status">
+        <span class="dot" aria-hidden="true"></span>
+        <div><h3>준비 중</h3><p>출시 소식은 이 페이지에 가장 먼저 올립니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="contact-h">문의</h2>
+        <p class="lead">궁금한 점, 앱 사용 중 생긴 문제, 제안은 이메일로 보내 주세요. 이름, 전화번호, 주소는 적지 않으셔도 됩니다.</p>
+      </div>
+      <div class="mailbox">
+        <a class="mail" href="mailto:dambaekstudio@gmail.com">dambaekstudio@gmail.com</a>
+        <button class="btn sec" type="button" id="copy">주소 복사</button>
+        <span class="copied" id="copied" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 담백스튜디오</span>
+    <span><a href="privacy.html">개인정보 처리방침</a> · <a href="terms.html">이용약관</a> · <a href="mailto:dambaekstudio@gmail.com">dambaekstudio@gmail.com</a></span>
+  </div>
+</footer>
+<script>
+document.getElementById('copy').addEventListener('click',async()=>{
+  const s=document.getElementById('copied');
+  try{await navigator.clipboard.writeText('dambaekstudio@gmail.com');s.textContent='복사했습니다';}
+  catch(e){s.textContent='복사가 안 되면 주소를 길게 눌러 주세요';}
+  setTimeout(()=>{s.textContent=''},2400);
+});
+</script>
+</body>
+</html>
